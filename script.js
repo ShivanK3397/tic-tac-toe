@@ -76,12 +76,78 @@ function player(name,symbol){
 
    
 }
+const getPlayerNames = function(){
 
+    let playerX;
+    let playerO;
+
+    const dialog = document.querySelector("dialog");
+    dialog.showModal();
+
+    const submit = document.querySelector(".submit");
+    submit.addEventListener("click",(event)=>{
+        event.preventDefault();
+        if (player1.value===""||player2.value===""){
+            alert("Please Complete Form");
+        }
+        else{
+            console.log(player1.value);
+            dialog.close();
+        }
+    
+        
+
+    });
+    dialog.addEventListener("cancel",(event)=>{
+        event.preventDefault();
+    })
+
+
+    function player1Name(){
+       
+        return player1.value;
+    }
+
+    function player2Name(){
+        return player2.value;
+    }
+
+    return {player1Name,player2Name};
+}
 
 const displayControl = function(){
     let symbol="X";
-    const player1 =player("Shivan","X");
-    const player2 = player("Mike","O");
+    let playerX;
+    let playerO;
+    const dialog = document.querySelector("dialog");
+
+    dialog.showModal();
+
+    const submit = document.querySelector(".submit");
+    submit.addEventListener("click",(event)=>{
+        event.preventDefault();
+        if (player1.value===""||player2.value===""){
+           
+        }
+        else{
+            
+            dialog.close();
+
+        }
+    
+        
+
+    });
+    dialog.addEventListener("cancel",(event)=>{
+        event.preventDefault();
+    })
+
+    dialog.addEventListener("close",()=>{
+        playerX=player(player1.value,"X");
+        playerO=player(player2.value,"O");
+    })
+
+    
     const winMessage = document.querySelector(".win-message")
     let win=false;
     let numOfTurns =0;
@@ -97,7 +163,7 @@ const displayControl = function(){
 
             if(symbol==="X"&&!win){
                 
-                player1.add(index.dataset.index-1);
+                playerX.add(index.dataset.index-1);
                 win = gameboard.checkWin(symbol);
                 numOfTurns++;
                 symbol="O";
@@ -105,18 +171,18 @@ const displayControl = function(){
             }
             else if(symbol==="O"&&!win){
                 
-                player2.add(index.dataset.index-1);
+                playerO.add(index.dataset.index-1);
                 win = gameboard.checkWin(symbol);
                 numOfTurns++;
                 symbol="X";
             }
 
             if (win===true&&symbol==="O"){
-                winMessage.textContent=`${player1.getPlayerName()} is the winner!`;
+                winMessage.textContent=`${playerX.getPlayerName()} is the winner!`;
                 
             }
             else if (win===true &&symbol==="X"){
-                winMessage.textContent=`${player2.getPlayerName()} is the winner!`;
+                winMessage.textContent=`${playerO.getPlayerName()} is the winner!`;
 
             }
             else if (numOfTurns===9){
@@ -139,9 +205,6 @@ const displayControl = function(){
     
 }();
 
-const restartGame = function(){
-    
-}();
 
 
 
