@@ -196,6 +196,8 @@ const displayControl = function(){
         board.forEach((index)=>{
             index.textContent="";
             win=false;
+            numOfTurns=0;
+            symbol="X";
             gameboard.resetBoard();
 
         });
