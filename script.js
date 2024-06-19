@@ -72,6 +72,7 @@ function player(name,symbol){
         }
     }
 
+
     return {add,getPlayerName};
 
    
@@ -120,6 +121,7 @@ const displayControl = function(){
     let playerX;
     let playerO;
     const dialog = document.querySelector("dialog");
+    const form = document.querySelector("form");
 
     dialog.showModal();
 
@@ -145,6 +147,8 @@ const displayControl = function(){
     dialog.addEventListener("close",()=>{
         playerX=player(player1.value,"X");
         playerO=player(player2.value,"O");
+        form.reset();
+        
     })
 
     
@@ -195,13 +199,33 @@ const displayControl = function(){
     restart.addEventListener("click",()=>{
         board.forEach((index)=>{
             index.textContent="";
-            win=false;
-            numOfTurns=0;
-            symbol="X";
-            gameboard.resetBoard();
+            
 
         });
+        win=false;
+        numOfTurns=0;
+        symbol="X";
+        gameboard.resetBoard();
+        winMessage.textContent="";
     });
+
+    const playAgain = document.querySelector(".play-again");
+    playAgain.addEventListener("click",()=>{
+    dialog.showModal();
+    board.forEach((index)=>{
+        index.textContent="";
+        
+
+    });
+    win=false;
+    numOfTurns=0;
+    symbol="X";
+    gameboard.resetBoard();
+    winMessage.textContent="";
+}
+    
+
+);
 
 
     
